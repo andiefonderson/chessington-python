@@ -80,3 +80,6 @@ class Board:
 
     def space_available(self, square):
         return self.get_piece(square) == None
+
+    def inbounds(self, square: Square):
+        return not(square.col > 7 or square.col < 0 or square.row > 7 or square.row < 0)
