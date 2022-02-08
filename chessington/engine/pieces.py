@@ -42,9 +42,14 @@ class Pawn(Piece):
         current_position = board.find_piece(self)
         player_move = 1 if self.player == Player.WHITE else -1
         possible_positions = []
-        possible_positions.append(Square.at(current_position.row + player_move, current_position.col))
-        if (not self._has_moved):
-            possible_positions.append(Square.at(current_position.row + player_move * 2, current_position.col))
+
+        new_move = Square.at(current_position.row + player_move, current_position.col)
+        if(board.space_available(new_move)):
+            possible_positions.append(new_move)
+            new_move = Square.at(current_position.row + player_move * 2, current_position.col)
+            if (not self._has_moved and board.space_available(new_move)):
+                possible_positions.append(new_move)
+            
         return possible_positions
 
     def move_to(self, board, new_square):
