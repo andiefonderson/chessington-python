@@ -1,6 +1,6 @@
 from chessington.engine.board import Board
 from chessington.engine.data import Player, Square
-from chessington.engine.pieces import Pawn
+from chessington.engine.pieces import Bishop, Pawn
 
 class TestPawns:
 
@@ -110,7 +110,7 @@ class TestPawns:
         board.set_piece(pawn_square, pawn)
 
         obstructing_square = Square.at(5, 4)
-        obstruction = Pawn(Player.BLACK)
+        obstruction = Pawn(Player.WHITE)
         board.set_piece(obstructing_square, obstruction)
 
         # Act
@@ -129,7 +129,7 @@ class TestPawns:
         board.set_piece(pawn_square, pawn)
 
         obstructing_square = Square.at(3, 4)
-        obstruction = Pawn(Player.WHITE)
+        obstruction = Pawn(Player.BLACK)
         board.set_piece(obstructing_square, obstruction)
 
         # Act
@@ -148,7 +148,7 @@ class TestPawns:
         board.set_piece(pawn_square, pawn)
 
         obstructing_square = Square.at(6, 4)
-        obstruction = Pawn(Player.BLACK)
+        obstruction = Bishop(Player.WHITE)
         board.set_piece(obstructing_square, obstruction)
 
         # Act
@@ -167,7 +167,7 @@ class TestPawns:
         board.set_piece(pawn_square, pawn)
 
         obstructing_square = Square.at(2, 4)
-        obstruction = Pawn(Player.WHITE)
+        obstruction = Bishop(Player.BLACK)
         board.set_piece(obstructing_square, obstruction)
 
         # Act
@@ -186,7 +186,7 @@ class TestPawns:
         board.set_piece(pawn_square, pawn)
 
         obstructing_square = Square.at(2, 4)
-        obstruction = Pawn(Player.BLACK)
+        obstruction = Bishop(Player.WHITE)
         board.set_piece(obstructing_square, obstruction)
 
         # Act
@@ -205,7 +205,7 @@ class TestPawns:
         board.set_piece(pawn_square, pawn)
 
         obstructing_square = Square.at(5, 4)
-        obstruction = Pawn(Player.WHITE)
+        obstruction = Pawn(Player.BLACK)
         board.set_piece(obstructing_square, obstruction)
 
         # Act
@@ -254,19 +254,14 @@ class TestPawns:
         board.set_piece(pawn_square, pawn)
 
         enemy1 = Pawn(Player.BLACK)
-        enemy1_square = Square.at(4, 5)
+        enemy1_square = Square.at(4, 4)
         board.set_piece(enemy1_square, enemy1)
-
-        enemy2 = Pawn(Player.BLACK)
-        enemy2_square = Square.at(4, 3)
-        board.set_piece(enemy2_square, enemy2)
 
         # Act
         moves = pawn.get_available_moves(board)
 
         # Assert
         assert enemy1_square in moves
-        assert enemy2_square in moves
 
     @staticmethod
     def test_black_pawns_can_capture_diagonally():
@@ -278,19 +273,14 @@ class TestPawns:
         board.set_piece(pawn_square, pawn)
 
         enemy1 = Pawn(Player.WHITE)
-        enemy1_square = Square.at(2, 5)
+        enemy1_square = Square.at(2, 4)
         board.set_piece(enemy1_square, enemy1)
-
-        enemy2 = Pawn(Player.WHITE)
-        enemy2_square = Square.at(2, 3)
-        board.set_piece(enemy2_square, enemy2)
 
         # Act
         moves = pawn.get_available_moves(board)
 
         # Assert
         assert enemy1_square in moves
-        assert enemy2_square in moves
 
     @staticmethod
     def test_white_pawns_cannot_move_diagonally_except_to_capture():

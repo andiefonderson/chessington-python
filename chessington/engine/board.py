@@ -78,8 +78,15 @@ class Board:
             self.set_piece(from_square, None)
             self.current_player = self.current_player.opponent()
 
-    def space_available(self, square):
-        return self.get_piece(square) == None
+    def space_available(self, current_piece_player, square):
+        space_to_check = self.get_piece(square)
+        if space_to_check == None:
+            return True
+        else:
+            if space_to_check.player != current_piece_player:
+                return True
+
+        return False
 
     def inbounds(self, square: Square):
         return not(square.col > 7 or square.col < 0 or square.row > 7 or square.row < 0)
